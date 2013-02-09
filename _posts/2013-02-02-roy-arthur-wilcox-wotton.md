@@ -13,9 +13,9 @@ which didn't sit well with his muscular Christian socialism. We argued
 constantly: about communities, theism, technology, relationships. He
 was almost impossible to pin down on anything resembling a logical
 argument: every point would be met by an anecdote, every refutation by
-a quote from a Latin poet. To an Apollonian mind, he was frustratingly
-Dionysian, and for a while, that blinded me to the deep humanity
-behind everything that he said.
+a quote from a Latin poet. To a mathematical, Apollonian mind, he was
+frustratingly Dionysian, and for a while, that blinded me to the deep
+humanity behind everything that he said.
 
 He had a looping, elliptical mind - he ran on narrative and allusion,
 anecdote and myth. He'd sit me down and tell me stories from Ovid, of
