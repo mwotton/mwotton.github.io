@@ -90,3 +90,29 @@ unfortunate way with ghc-mod - ghc-mod will periodically save files to
 check if they compile. If anyone's looking for a fun little project
 that would be of active benefit to the community, here's a place to
 start.
+
+EDIT
+
+this is a little faster:
+
+     guard :shell do
+
+       def build_command(files)
+           "ghc -fno-code #{files.join(' ')} -isrc -e 'return 0' && cabal build && cabal test"
+       end
+       watch(%r{.*\.cabal$}) do
+           `cabal build && cabal test`
+       end
+
+       watch(%r{src/.*hs}) do |files|
+           `#{build_command(files)}` 
+       end
+
+       watch(%r{test/.*hs}) do |files|
+           `#{build_command(files)}` 
+       end
+
+     end
+
+
+and for extra credit, link with the [gold linker](http://stackoverflow.com/questions/6952396/why-does-ghc-take-so-long-to-link)
