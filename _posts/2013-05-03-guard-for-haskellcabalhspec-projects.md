@@ -93,7 +93,10 @@ start.
 
 EDIT
 
-this is a little faster:
+this is a little faster, and will also not fire on _flymake.hs files.
+For that to work well with ghc-mod, you'll need the latest ghc-mod off
+hackage - it looks like the version in elpa is pretty old.
+
 
      guard :shell do
 
@@ -104,11 +107,11 @@ this is a little faster:
            `cabal build && cabal test`
        end
 
-       watch(%r{src/.*hs}) do |files|
+       watch(%r{src/.*(?<!flymake)\.hs$}) do |files|
            `#{build_command(files)}` 
        end
 
-       watch(%r{test/.*hs}) do |files|
+       watch(%r{test/.*(?<!flymake)\.hs$}) do |files|
            `#{build_command(files)}` 
        end
 
