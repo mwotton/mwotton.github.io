@@ -93,7 +93,7 @@ start.
 
 EDIT
 
-this is a little faster, and will also not fire on _flymake.hs files.
+this is a little faster, and will also not fire on flymake temporary files.
 For that to work well with ghc-mod, you'll need the latest ghc-mod off
 hackage - it looks like the version in elpa is pretty old.
 
