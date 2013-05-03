@@ -2,15 +2,15 @@
 layout: post
 title: "guard for haskell/cabal/hspec projects"
 description: ""
-category: 
+category:
 tags: [haskell]
 ---
 {% include JB/setup %}
 
 I've recently moved most of my development work to Haskell, and in the
-main, it's been extremely successful. 
+main, it's been extremely successful.
 High-concurrency work has been a breeze: the only difficulties I've
-hit have been to do with operating system limits, not Haskell's. 
+hit have been to do with operating system limits, not Haskell's.
 
 Ruby still has an amazing set of developer niceties, however, and I
 miss them in Haskell. So, here's how to get some of the love back,
@@ -108,12 +108,23 @@ hackage - it looks like the version in elpa is pretty old.
        end
 
        watch(%r{src/.*(?<!flymake)\.hs$}) do |files|
-           `#{build_command(files)}` 
+           `#{build_command(files)}`
        end
 
        watch(%r{test/.*(?<!flymake)\.hs$}) do |files|
-           `#{build_command(files)}` 
+           `#{build_command(files)}`
        end
+
+       # because we know exactly what's been changed, we can be a bit
+       # trickier about how much to load. If this fails, can always go
+       # back to the build_command method
+       watch(%r{test/.*(?<!flymake)\.hs$}) do |files|
+         cmd = files.collect do |f|
+                 "ghc -isrc -itest -e 'hspec spec' #{f} test/dummy.hs"
+               end.join(' && ')
+         `#{cmd}`
+       end
+
 
      end
 
