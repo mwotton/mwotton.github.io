@@ -18,6 +18,7 @@ takes 800ms), 14ms for 2000 characters, and 160ms for 20000
 characters, which (extremely unscientifically) looks roughly O(n log n).
 
 Source on [github](http://github.com/mwotton/string-similarity),
-package will be on Hackage when it finishes uploading.
+package will be on Hackage when it finishes uploading. Thanks to
+[Bryan O'Sullivan](www.serpentine.com) for the excellent suffix tree library.
 
 {% include JB/setup %}
