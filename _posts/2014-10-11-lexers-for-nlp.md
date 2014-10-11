@@ -19,9 +19,9 @@ Word boundary identification is one of these problems. This isn't a
 tremendously difficult problem in English: often it's done with
 regular expressions and ad-hoc tools, because a word is defined as a
 non-empty string of alphabetic characters*. It's not so easy in
-Vietnamese: hot toc can't be analysed in terms of its parts. "hot toc"
-has to be recognised as a single chunk, but we have to be able to
-match "hot" on its own too.
+Vietnamese: "hot toc" can't be analysed in terms of its parts, it has
+to be recognised as a single chunk. If it's not followed by "toc", we
+should match it by itself.
 
 Another example is searching for possible domain names in unstructured
 text (you can imagine how useful this might be to a webscraping
@@ -55,7 +55,7 @@ very cool data structure that encodes a set of strings as shared
 prefixes in a tree. This means that you can incrementally follow
 strings, and easily find the longest possible match. As soon as we
 fail to match, we bomb out, so we can be confident that we are doing
-close to a constant amount of work per character inspected)
+close to a constant amount of work per character inspected.)
 
 Anyway, after I moaned a bit that there was no way to get any
 information about how much the trie had matched, she made a
@@ -85,10 +85,19 @@ std dev              2.523 ms   (1.291 ms .. 3.045 ms)
 variance introduced by outliers: 16% (moderately inflated)
 
 oddly, the real amount of time taken in practice is quite different.
-Piping ~ 60mb through the cli tool gives these results:
+Piping ~ 60mb from a cached file through the cli tool gives these results:
 
 LEXER=ctk ./dist/build/english/english +RTS -p > /dev/null  74.80s user 5.14s system 87% cpu 1:30.86 total
 LEXER=trie ./dist/build/english/english +RTS -p > /dev/null  40.10s user 2.08s system 99% cpu 42.423 total
+
+A megabyte a second is acceptable, although with terabytes of data to
+play with nothing's ever fast enough. (The unix approach is admirably
+simple, and even faster:
+
+  tr -c '[:alpha:]' '\n' | grep -F -f /usr/share/dict/words
+
+but of course only works because we have disjoint sets of word and
+non-word characters.)
 
 
 Anyway, I hope I've convinced you that compiler tools aren't just for
