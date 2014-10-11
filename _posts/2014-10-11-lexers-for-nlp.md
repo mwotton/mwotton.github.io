@@ -33,19 +33,18 @@ somewhere.)
 
 Once you view both these problems through the lens of compiler tech
 rather than trying to hack it from the command line with
-stringly-typed tools, it becomes obvious: this problem of recognising
-a sequence of individual tokens has been studied extensively in
-computer science. We call it lexing, and while it is more commonly
-applied to computer languages, it works remarkably well on natural
-languages too.
+stringly-typed tools like the unix toolkit, it becomes obvious: this
+problem of recognising a sequence of individual tokens has been
+studied extensively in computer science. We call it lexing, and while
+it is more commonly applied to computer languages, it works remarkably
+well on natural languages too.
 
 My first attempt was with CTKL, Manuel Chakravarty's compiler toolkit.
 It worked reasonably well, but the runtime is dominated by the expense
-of building the initial lexer: with a dictionary of 99k words and a
-600 kbyte input file, it took 10s (unprofiled) to churn through. There
-is a quadratic cost in construction of the lexer that is undetectable
-when the dictionary is small (ie, in its usual use case). This could
+of building the initial lexer, which is quadratic. When the dictionary
+is small (ie, in its usual use case), this doesn't matter, and could
 be optimised, I just haven't done it.
+
 
 While I was building the CTKL-based version,
 [Wren Romano](http://winterkoninkje.dreamwidth.org/) got back to me on
@@ -58,7 +57,6 @@ strings, and easily find the longest possible match. As soon as we
 fail to match, we bomb out, so we can be confident that we are doing
 close to a constant amount of work per character inspected)
 
-
 Anyway, after I moaned a bit that there was no way to get any
 information about how much the trie had matched, she made a
 [new release](https://hackage.haskell.org/package/bytestring-trie-0.2.4)
@@ -69,7 +67,29 @@ character burned and start again one character along. This would be
 inefficient if we were doing string search, but because we expect most
 of the text to be actual words, the overhead should be minimal.
 
-{insert benchmark chatter here}
+Benchmarks
+==========
+
+benchmarking lexers/ctk
+time                 313.6 ms   (311.4 ms .. 316.3 ms)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 311.0 ms   (310.1 ms .. 312.2 ms)
+std dev              1.146 ms   (462.6 μs .. 1.474 ms)
+variance introduced by outliers: 16% (moderately inflated)
+
+benchmarking lexers/trie
+time                 267.8 ms   (258.7 ms .. 275.9 ms)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 267.3 ms   (264.7 ms .. 269.3 ms)
+std dev              2.523 ms   (1.291 ms .. 3.045 ms)
+variance introduced by outliers: 16% (moderately inflated)
+
+oddly, the real amount of time taken in practice is quite different.
+Piping ~ 60mb through the cli tool gives these results:
+
+LEXER=ctk ./dist/build/english/english +RTS -p > /dev/null  74.80s user 5.14s system 87% cpu 1:30.86 total
+LEXER=trie ./dist/build/english/english +RTS -p > /dev/null  40.10s user 2.08s system 99% cpu 42.423 total
+
 
 Anyway, I hope I've convinced you that compiler tools aren't just for
 compilers. They're great for dealing with unstructured, messy input too.
