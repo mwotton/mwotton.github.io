@@ -91,20 +91,36 @@ LEXER=ctk ./dist/build/english/english +RTS -p > /dev/null  74.80s user 5.14s sy
 LEXER=trie ./dist/build/english/english +RTS -p > /dev/null  40.10s user 2.08s system 99% cpu 42.423 total
 
 A megabyte a second is acceptable, although with terabytes of data to
-play with nothing's ever fast enough. (The unix approach is admirably
-simple, and even faster:
+play with nothing's ever fast enough. My initial approach was with
+unix tools:
 
-  tr -c '[:alpha:]' '\n' | grep -F -f /usr/share/dict/words
+  sed 's/^/^/;s/$/$/;' < /usr/share/dict/words > precise_patterns
+  tr -c '[:alpha:]' '\n' | grep -f precise_patterns >/dev/null
 
-but of course only works because we have disjoint sets of word and
-non-word characters.)
+but this blew out to 26gb before I killed it (and in any case, would
+not work with non-English languages). You can use the fixed-strings
+argument to grep (-F) which brings the runtime down to 15s, but that's
+not quite precise, as it doesn't anchor at the beginning and end of
+the line. It is possible to create one single regular expression that
+looks a bit like
 
+
+```
+^((A)|(A's)|(AA's)|(AB's)|(ABM's)...)$
+
+```
+
+but it is extremely slow - it looks like grep isn't clever enough to
+factor out all the strings that share the same prefix.
 
 Anyway, I hope I've convinced you that compiler tools aren't just for
-compilers. They're great for dealing with unstructured, messy input too.
+compilers. They're great for dealing with unstructured, messy input
+too - just because the domain is fuzzy doesn't mean that your handling
+of it should be.
 
 
 [code](http://github.com/mwotton/lexy)
 
 * wibble 1: yes, arguably - and ' as well. but this is a blog post,
   not a dissertation.
+3
