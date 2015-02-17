@@ -149,7 +149,7 @@ here, so we look up (a,c) -> c on
 [hoogle](https://www.haskell.org/hoogle/) -  the first result is snd,
 which seems about right.
 
-</pre>
+<pre>
 g4 x y = (_foo,snd y)
 </pre>
 
