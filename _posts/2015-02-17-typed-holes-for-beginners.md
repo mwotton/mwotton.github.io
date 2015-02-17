@@ -32,14 +32,14 @@ but just change in-place. I've named them all to make it clear.
 In our first version, we'll just name the arguments to the function
 and insert a hole for the result.
 
-```
+<pre>
 g,g2,g3,g4,g5,g6,g7 :: (a -> b) -> (a, c) -> (b, c)
 
 g x y = _foo
-```
+</pre>
 
 
-```
+<pre>
 src/Text/FastEdit.hs:56:9:
     Found hole ‘_foo’ with type: (b, c)
     Where: ‘b’ is a rigid type variable bound by
@@ -55,17 +55,17 @@ src/Text/FastEdit.hs:56:9:
         (bound at src/Text/FastEdit.hs:56:1)
     In the expression: _foo
     In an equation for ‘g’: g x y = _foo
-```
+</pre>
 
 If we look at the type GHC has found for _foo, clearly our result is
 going to be a pair: let's split our hole up.
 
 
-```haskell
+<pre>haskell
 g2 x y = (_foo,_bar)
-```
+</pre>
 
-```
+<pre>
 src/Text/FastEdit.hs:57:11:
     Found hole ‘_foo’ with type: b
     Where: ‘b’ is a rigid type variable bound by
@@ -95,7 +95,7 @@ src/Text/FastEdit.hs:57:16:
     In the expression: (_foo, _bar)
     In an equation for ‘g2’: g2 x y = (_foo, _bar)
 
-```
+</pre>
 
 Focusing on _bar first, we know that it's got type 'c'.
 Now we have to look at the relevant bindings: we need to find some way
@@ -105,12 +105,12 @@ it also needs to have a c passed in, so it can't be the ultimate
 source. That leaves y. It's not quite the right type, but let's pick
 that out as an argument and update the hole.
 
-```haskell
+<pre>haskell
 g3 x y = (_foo,_bar y)
-```
+</pre>
 
 
-```
+<pre>
 src/Text/FastEdit.hs:58:11:
     Found hole ‘_foo’ with type: b
     Where: ‘b’ is a rigid type variable bound by
@@ -141,7 +141,7 @@ src/Text/FastEdit.hs:58:16:
     In the expression: _bar
     In the expression: _bar y
     In the expression: (_foo, _bar y)
-```
+</pre>
 
 Progress! Again focusing on the second error message, we now need a
 function from (a,c) to c. The relevant bindings don't seem to help us
@@ -149,11 +149,11 @@ here, so we look up (a,c) -> c on
 [hoogle](https://www.haskell.org/hoogle/) -  the first result is snd,
 which seems about right.
 
-```haskell
+</pre>haskell
 g4 x y = (_foo,snd y)
-```
+</pre>
 
-```
+<pre>
 src/Text/FastEdit.hs:59:11:
     Found hole ‘_foo’ with type: b
     Where: ‘b’ is a rigid type variable bound by
@@ -167,7 +167,7 @@ src/Text/FastEdit.hs:59:11:
     In the expression: _foo
     In the expression: (_foo, snd y)
     In an equation for ‘g4’: g4 x y = (_foo, snd y)
-```
+</pre>
 
 We've finished the second hole, so we focus on _foo now.
 Looking at the relevant bindings, we can dismiss y because it doesn't
@@ -175,11 +175,11 @@ return a 'b'. x looks like the most relevant piece, but it is clear we
 need to pass something into it, because it's a function. We don't know
 what yet, so we let the hole do the work.
 
-```haskell
+<pre>haskell
 g5 x y = ( x _foo,snd y)
-```
+</pre>
 
-```
+<pre>
 src/Text/FastEdit.hs:60:14:
     Found hole ‘_foo’ with type: a
     Where: ‘a’ is a rigid type variable bound by
@@ -193,16 +193,16 @@ src/Text/FastEdit.hs:60:14:
     In the first argument of ‘x’, namely ‘_foo’
     In the expression: x _foo
     In the expression: (x _foo, snd y)
-```
+</pre>
 
 On the home straight now! We have an 'a' hidden inside y:
 
-```haskell
+<pre>haskell
 g6 x y = ( x (_foo y) ,snd y)
-```
+</pre>
 
 
-```
+<pre>
 src/Text/FastEdit.hs:61:15:
     Found hole ‘_foo’ with type: (a, c) -> a
     Where: ‘a’ is a rigid type variable bound by
@@ -219,15 +219,15 @@ src/Text/FastEdit.hs:61:15:
     In the expression: _foo
     In the first argument of ‘x’, namely ‘(_foo y)’
     In the expression: x (_foo y)
-```
+</pre>
 
 We could use hoogle again, but we happen to remember that 'fst' can be
 used to pick out the first element of a pair:
 
 
-```haskell
+<pre>haskell
 g7 x y = (x (fst y) ,snd y)
-```
+</pre>
 
 
 and we're done.
