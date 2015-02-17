@@ -61,7 +61,7 @@ If we look at the type GHC has found for _foo, clearly our result is
 going to be a pair: let's split our hole up.
 
 
-<pre>haskell
+<pre>
 g2 x y = (_foo,_bar)
 </pre>
 
@@ -105,7 +105,7 @@ it also needs to have a c passed in, so it can't be the ultimate
 source. That leaves y. It's not quite the right type, but let's pick
 that out as an argument and update the hole.
 
-<pre>haskell
+<pre>
 g3 x y = (_foo,_bar y)
 </pre>
 
@@ -149,7 +149,7 @@ here, so we look up (a,c) -> c on
 [hoogle](https://www.haskell.org/hoogle/) -  the first result is snd,
 which seems about right.
 
-</pre>haskell
+</pre>
 g4 x y = (_foo,snd y)
 </pre>
 
@@ -175,7 +175,7 @@ return a 'b'. x looks like the most relevant piece, but it is clear we
 need to pass something into it, because it's a function. We don't know
 what yet, so we let the hole do the work.
 
-<pre>haskell
+<pre>
 g5 x y = ( x _foo,snd y)
 </pre>
 
@@ -197,7 +197,7 @@ src/Text/FastEdit.hs:60:14:
 
 On the home straight now! We have an 'a' hidden inside y:
 
-<pre>haskell
+<pre>
 g6 x y = ( x (_foo y) ,snd y)
 </pre>
 
@@ -225,7 +225,7 @@ We could use hoogle again, but we happen to remember that 'fst' can be
 used to pick out the first element of a pair:
 
 
-<pre>haskell
+<pre>
 g7 x y = (x (fst y) ,snd y)
 </pre>
 
