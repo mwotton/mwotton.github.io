@@ -245,3 +245,13 @@ relentlessly forward. In practice, experienced Haskellers will have
 something like [ghc-mod](http://www.mew.org/~kazu/proj/ghc-mod/en/)
 running so they can get faster feedback in-editor, but we can still do
 it with just an editor and an open GHCi.
+
+
+ADDENDUM
+========
+
+As @benno37 pointed out, it's the underscore that makes it a typed
+hole. This is quite clever really - it is _only_ considered a hole if
+it would otherwise be a scope error, so if for some misbegotten reason
+you decide to name a parameter to a function "_foo", it will remain a
+normal variable.
