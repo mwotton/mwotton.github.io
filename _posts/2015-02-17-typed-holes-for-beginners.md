@@ -32,12 +32,9 @@ but just change in-place. I've named them all to make it clear.
 In our first version, we'll just name the arguments to the function
 and insert a hole for the result.
 
-```haskell
-
+```
 g,g2,g3,g4,g5,g6,g7 :: (a -> b) -> (a, c) -> (b, c)
-
 g x y = _foo
-
 ```
 
 
