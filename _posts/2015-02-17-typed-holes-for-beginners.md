@@ -149,7 +149,7 @@ src/Text/FastEdit.hs:58:16:
 Progress! Again focusing on the second error message, we now need a
 function from (a,c) to c. The relevant bindings don't seem to help us
 here, so we look up (a,c) -> c on
-[hoogle](https://www.haskell.org/hoogle/) -  the first result is snd,
+[hoogle](https://www.haskell.org/hoogle/?hoogle=%28a%2Cc%29+-%3E+c) -  the first result is snd,
 which seems about right.
 
 <pre>
