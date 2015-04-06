@@ -20,8 +20,14 @@ and an equally unique bug might lurk in that combination.
 This happened to me recently: a case-insensitive literal string parser
 (stringCI) was [broken](https://github.com/bos/attoparsec/issues/99) in a few
 versions, and my [robots-txt](https://github.com/meanpath/robots)
-library was silently broken: I didn't find out until my CI ran for
-[unrelated reasons](https://travis-ci.org/meanpath/robots/builds/56539308).
+library was silently broken.
+
+Later, I added some extra tests to robots-txt, and was very surprised
+when [a whole swathe of unrelated tests
+failed](https://travis-ci.org/meanpath/robots/builds/56539308).
+Of course, Travis had pulled in a later version of Attoparsec, and the
+bug was now visible.
+
 Stackage wouldn't have solved that problem - Attoparsec's tests still
 passed, they just missed an important case. It only showed up in the
 context of robots-txt's tests. Obviously I ran my app-level tests, but
