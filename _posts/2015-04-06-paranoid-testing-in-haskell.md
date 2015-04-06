@@ -47,8 +47,8 @@ level: for any given build, there's an explicit set of versioned
 packages already chosen.
 
 What I'd like to propose is a command (maybe integrated with cabal?)
-that would take the current set of package versions from my app (possibly as a
-cabal sandbox), and for each dependency, install and run its tests in
+that would take the current set of package versions from my app, possibly as a
+cabal sandbox, and for each dependency, install and run its tests in
 a clean copy of that sandbox. A copy is necessary because while we
 can expect the libraries to play well together in terms of building
 cleanly, we can't expect their test dependencies to be so
