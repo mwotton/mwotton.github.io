@@ -24,7 +24,10 @@ library was silently broken: I didn't find out until my CI ran for
 [unrelated reasons](https://travis-ci.org/meanpath/robots/builds/56539308).
 Stackage wouldn't have solved that problem - Attoparsec's tests still
 passed, they just missed an important case. It only showed up in the
-context of robots-txt's tests.
+context of robots-txt's tests. Obviously I ran my app-level tests, but
+they were not sufficient to catch this particular bug, and it is
+probably unreasonable to expect app-level tests to catch lib-level
+problems anyway.
 
 Upper bounds might have alleviated this slightly, but manually
 managing the upper bounds down to a minor version and continually
