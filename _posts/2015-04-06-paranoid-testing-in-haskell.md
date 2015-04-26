@@ -70,3 +70,9 @@ reporting that's coming with [Hackage
 2](https://github.com/haskell/hackage-server/issues/44) for a fairly
 massive set of test data to augment the already-planned build data
 collection.
+
+
+EDIT
+====
+
+a quick proof of concept is at https://github.com/mwotton/marvin
