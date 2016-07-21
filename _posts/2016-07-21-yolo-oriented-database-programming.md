@@ -60,4 +60,28 @@ doAThing barU fooU =
     rollbackTransaction = rawExecute "ROLLBACK TO SAVEPOINT savepointname" []
 ```
 
+
+EDIT: extracting as a combinator to make the logic a bit clearer:
+
+```
+
+withViolation :: forall a . DB a -> DB a ->  DB a
+withViolation def body = do
+  handle violation $ do
+    startTransaction
+    result <- body
+    commitTransaction
+    return result
+  where
+    violation :: SqlError -> DB a
+    violation _e = do
+      rollbackTransaction
+      def
+
+    rollbackTransaction, startTransaction, commitTransaction :: DB ()
+    startTransaction    = rawExecute "SAVEPOINT             violationSavepoint" []
+    commitTransaction   = rawExecute "RELEASE SAVEPOINT     violationSavepoint" []
+    rollbackTransaction = rawExecute "ROLLBACK TO SAVEPOINT violationSavepoint" []
+```
+
 I'm @mwotton on twitter, hit me up with opinions, recriminations, etc.
