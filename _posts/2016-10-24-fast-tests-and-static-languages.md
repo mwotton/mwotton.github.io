@@ -28,7 +28,7 @@ more advanced the type system the longer the build times.
 
 Clearly David is setting up a tradeoff, but the tradeoff is not a real
 one. Yes, if you run your tests by compiling your code then running
-it, it can be slow: my [robots-txt library](github.com/meanpath/robots)
+it, it can be slow: my [robots-txt library](https://github.com/meanpath/robots)
 takes about 8 seconds on my machine to
 build and run the 229 tests. However, every modern static language
 worth its salt has an interpreter, same as every dynamic language, and
