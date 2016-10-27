@@ -66,7 +66,8 @@ cop this slowdown, and just try to keep our files small & coherent
 enough that a minimum of pointless work needs to be done.
 
 As far as just loading the code goes, the interpreter approaches do
-ok[1]. The compilation approach is usually pretty slow, at least if we
+ok (unless you have significant Template Haskell, in which case heaven
+help you.) The compilation approach is usually pretty slow, at least if we
 keep the subsecond goal in mind.
 
 I haven't seen anything capable of only running the tests that
@@ -99,5 +100,3 @@ Tenzing Norgay, helping me through the rough bits and making up for my
 laziness, sloppiness and impatience.
 
 Then I open my eyes, sigh, and hit M-x intero-restart.
-
-[1]: Unless you have significant Template Haskell, in which case heaven help you. I try not to touch our Models.hs file unnecessarily.
