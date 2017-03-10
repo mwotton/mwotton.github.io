@@ -40,7 +40,7 @@ Now, when you want to run cajun style, you can edit your command line
 to something like
 
 ```
-stack build --flag mycoolproject:-libWerror
+stack build --flag mycoolproject:-lib-Werror
 ```
 
 turning this into a convenient makefile action is left as an exercise
