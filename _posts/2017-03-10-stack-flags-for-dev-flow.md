@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "stack flags for dev flow"
+title: "cabal flags for dev flow"
 description: ""
 category:
 tags: [haskell]
