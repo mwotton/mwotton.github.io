@@ -36,3 +36,7 @@ everything else down to a shuddering halt.
 added. a workaround is to only symlink the top level files and
 directory instead of a full shadow tree: that way, only top level
 changes will break things.)
+
+(another possibility would be to set STACK_WORK=.stack-work-profiling
+whenever you run profiling commands, but you're going to screw it up
+eventually - probably better to have totally separate implicit contexts.)
