@@ -279,4 +279,4 @@ I am available for hire: mwotton@gmail.com.)
 detailed feedback, and thanks to everybody else who read it, even if
 you couldn't think of improvements.)
 
-(discussion at https://www.reddit.com/r/haskell/comments/6nazqm/notes_on_design_of_webscrapers_in_haskell/ )
+(discussion [here](https://www.reddit.com/r/haskell/comments/6nazqm/notes_on_design_of_webscrapers_in_haskell/))
