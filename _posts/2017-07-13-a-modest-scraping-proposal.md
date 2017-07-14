@@ -207,9 +207,16 @@ data PageType
   = InitialIndex
   | IntermediateIndex
   | ActualData
-  deriving Eq
+  deriving (Eq,Ord)
+```
 
+This is what defines the shape of the scrape, as seen by the user.
+Separating out the different kinds of pages we see means that we can
+parse them differently, without relying on fragile regular expressions
+on the URL - it also means we can prioritise some fetches above
+others, as well as restrict download slots on a page-type basis.
 
+```
 -- library code - this needs to be fleshed out.
 -- something slightly less general than Aeson's Value type: just scalars.
 data Column = ColText Text
@@ -267,3 +274,7 @@ and make them easier to avoid.
 
 (In other news, if you actually need this or other Haskell work done,
 I am available for hire: mwotton@gmail.com.)
+
+(Thanks to @tureus, @jfischoff, @mxavier and @thumphriees for their
+detailed feedback, and thanks to everybody else who read it, even if
+you couldn't think of improvements.)
