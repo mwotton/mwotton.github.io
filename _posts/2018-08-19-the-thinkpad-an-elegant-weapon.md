@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The ThinkPad: an elegant weapon for a more civilised age"
+title: "The ThinkPad: an elegant weapon"
 description: ""
 category:
 tags: []
