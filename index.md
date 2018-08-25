@@ -1,7 +1,6 @@
 ---
 layout: page
 title: shimweasel.com
-tagline: chaotic resemblance
 ---
 {% include JB/setup %}
 
