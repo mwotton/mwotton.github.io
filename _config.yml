@@ -24,7 +24,7 @@ theme: jekyll-theme-iota
 #theme: jekyll-theme-basically-basic
 # remote-theme: daattali/beautiful-jekyll
 #remote_theme: artlogic/jekyll-theme-iota
-remote-theme: "mmistakes/jekyll-theme-basically-basic"
+remote_theme: "mmistakes/jekyll-theme-basically-basic"
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
