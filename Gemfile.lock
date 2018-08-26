@@ -8,9 +8,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    beautiful-jekyll-theme (1.1.1)
-      jekyll (~> 3.3)
-      jekyll-paginate (~> 1.1)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -149,6 +146,12 @@ GEM
     jekyll-theme-architect (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
+    jekyll-theme-basically-basic (1.4.1)
+      jekyll (~> 3.7)
+      jekyll-feed (~> 0.10)
+      jekyll-paginate (~> 1.1)
+      jekyll-seo-tag (~> 2.5)
+      jekyll-sitemap (~> 1.2)
     jekyll-theme-cayman (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
@@ -158,6 +161,11 @@ GEM
     jekyll-theme-hacker (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
+    jekyll-theme-iota (0.9.0)
+      jekyll (~> 3.7)
+      jekyll-feed (~> 0.9)
+      jekyll-seo-tag (~> 2.4)
+      jekyll-sitemap (~> 1.2)
     jekyll-theme-leap-day (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
@@ -245,8 +253,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  beautiful-jekyll-theme
   github-pages
+  jekyll-remote-theme
+  jekyll-theme-basically-basic
+  jekyll-theme-iota
 
 BUNDLED WITH
    1.16.1

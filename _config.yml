@@ -10,7 +10,7 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "
 #
 #
 
-theme: beautiful-jekyll-theme
+# theme: beautiful-jekyll-theme
 title : shimweasel.com
 tagline: another quixotic hacker
 author :
@@ -20,8 +20,9 @@ author :
   twitter : mwotton
 #  feedburner : mowtton
 
-
-remote-theme: daattali/beautiful-jekyll
+theme: jekyll-theme-basically-basic
+# remote-theme: daattali/beautiful-jekyll
+remote-theme: "mmistakes/jekyll-theme-basically-basic"
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
