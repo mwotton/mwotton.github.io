@@ -9,7 +9,7 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "
 # so be sure to set them if your theme uses them.
 #
 #
-theme: jekyll-theme-midnight
+
 title : shimweasel.com
 tagline: another quixotic hacker
 author :
