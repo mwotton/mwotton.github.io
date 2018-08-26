@@ -22,7 +22,8 @@ author :
 
 #theme: jekyll-theme-basically-basic
 # remote-theme: daattali/beautiful-jekyll
-remote-theme: "mmistakes/jekyll-theme-basically-basic"
+remote-theme: artlogic/jekyll-theme-iota
+# remote-theme: "mmistakes/jekyll-theme-basically-basic"
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
