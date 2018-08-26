@@ -5,7 +5,6 @@ description: "or, digital Rube Goldberg machines for fun and profit"
 category:
 tags: [hacks ipad silliness]
 ---
-{% include JB/setup %}
 
 When I'm home, I am surrounded by monitors. It is like returning to a
 Mission-Control-influenced womb. Still, while I am definitely a fan of
@@ -75,3 +74,4 @@ textual glory I desire. All the other windows can be exiled to a
 virtual desktop gulag I don't visit (or more professionally set up to
 run headlessly somehow), and strangely, the whole setup seems to work
 remarkably well.
+

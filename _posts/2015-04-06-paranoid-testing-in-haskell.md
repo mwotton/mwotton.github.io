@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell testing]
 ---
-{% include JB/setup %}
 
 How we know our code does the right thing?
 

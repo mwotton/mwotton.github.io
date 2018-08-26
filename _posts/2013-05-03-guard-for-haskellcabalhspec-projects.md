@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell]
 ---
-{% include JB/setup %}
 
 I've recently moved most of my development work to Haskell, and in the
 main, it's been extremely successful.
@@ -130,3 +129,4 @@ hackage - it looks like the version in elpa is pretty old.
 
 
 and for extra credit, link with the [gold linker](http://stackoverflow.com/questions/6952396/why-does-ghc-take-so-long-to-link)
+

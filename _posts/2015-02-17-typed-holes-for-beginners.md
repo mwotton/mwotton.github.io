@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell]
 ---
-{% include JB/setup %}
 
 Typed holes are a feature GHC borrowed from Agda.
 They are incredibly useful for incremental development, making it

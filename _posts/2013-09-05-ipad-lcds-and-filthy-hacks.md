@@ -15,4 +15,3 @@ Using this [LCD](http://www.ebay.com.au/itm/LCD-Display-Screen-Panel-Replacement
 Still. I has all the pixels.
 
 
-{% include JB/setup %}

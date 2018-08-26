@@ -5,7 +5,6 @@ description: ""
 category:
 tags: []
 ---
-{% include JB/setup %}
 
 Traditionally, the new year is when we all make public proclamations
 of how we're going to be better humans: this year, we will read more,

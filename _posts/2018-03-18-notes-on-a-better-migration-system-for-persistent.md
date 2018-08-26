@@ -5,7 +5,6 @@ description: ""
 category: programming
 tags: [haskell databases]
 ---
-{% include JB/setup %}
 
 ## Problems with Persistent
 

@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell]
 ---
-{% include JB/setup %}
 
 
 It's good practice to make sure your code is warning-free before

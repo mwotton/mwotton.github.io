@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell scraping]
 ---
-{% include JB/setup %}
 
 # Why scraping libraries in Haskell aren't good enough
 

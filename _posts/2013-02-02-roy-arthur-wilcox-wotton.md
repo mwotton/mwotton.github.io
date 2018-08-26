@@ -5,7 +5,6 @@ description: ""
 category: 
 tags: [personal]
 ---
-{% include JB/setup %}
 
 I never agreed with my grandfather about anything, really. I was a
 stroppy little libertarian when I was younger, and a rabid atheist,

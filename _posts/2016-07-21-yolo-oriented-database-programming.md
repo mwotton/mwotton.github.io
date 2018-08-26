@@ -5,7 +5,6 @@ description: ""
 category: Haskell
 tags: [haskell postgresql persistent]
 ---
-{% include JB/setup %}
 
 I've been playing around a bit with a slightly different style of
 database code lately. Usually, I'd carefully check that a given

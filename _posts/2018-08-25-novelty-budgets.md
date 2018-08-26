@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [software]
 ---
-{% include JB/setup %}
 
 We measure a lot of things in software engineering these days. Test
 coverage, time-to-deploy, bugs per line - they're all good things to

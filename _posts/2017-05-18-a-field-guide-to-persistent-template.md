@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell negativeresult streamofconsciousness]
 ---
-{% include JB/setup %}
 
 Template Haskell is often considered a smell in Haskell, responsible
 for everything from slow compile times to impenetrable error messages

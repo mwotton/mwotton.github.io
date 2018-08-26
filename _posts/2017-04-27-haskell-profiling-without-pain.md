@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell]
 ---
-{% include JB/setup %}
 
 In general, stack is pretty good at caching build artifacts - the
 first build might be glacial, but incremental builds are snappy. This

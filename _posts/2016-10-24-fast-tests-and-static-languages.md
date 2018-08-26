@@ -5,7 +5,6 @@ description: ""
 category:
 tags: [haskell]
 ---
-{% include JB/setup %}
 
 This is to correct a small error in David R. Maciver's piece on [static
 typing](http://www.drmaciver.com/2016/10/static-typing-will-not-save-us-from-broken-software/)

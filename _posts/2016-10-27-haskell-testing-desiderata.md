@@ -5,7 +5,6 @@ description: ""
 category:
 tags: []
 ---
-{% include JB/setup %}
 
 A few days ago I wrote about
 [testing in Haskell](http://www.shimweasel.com/2016/10/24/fast-tests-and-static-languages).
