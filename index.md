@@ -3,7 +3,6 @@ layout: page
 title: shimweasel.com
 tagline: chaotic resemblance
 ---
-{% include JB/setup %}
 
 <ul class="posts">
   {% for post in site.posts %}
