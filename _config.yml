@@ -26,6 +26,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-remote-theme
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt
