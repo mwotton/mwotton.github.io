@@ -23,8 +23,8 @@ author :
 theme: jekyll-theme-iota
 #theme: jekyll-theme-basically-basic
 # remote-theme: daattali/beautiful-jekyll
-remote-theme: artlogic/jekyll-theme-iota
-# remote-theme: "mmistakes/jekyll-theme-basically-basic"
+#remote_theme: artlogic/jekyll-theme-iota
+remote-theme: "mmistakes/jekyll-theme-basically-basic"
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
