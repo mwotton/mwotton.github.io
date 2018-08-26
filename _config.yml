@@ -19,7 +19,12 @@ author :
   twitter : mwotton
 #  feedburner : mowtton
 
+
 remote-theme: daattali/beautiful-jekyll
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt
