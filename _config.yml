@@ -20,7 +20,7 @@ author :
   twitter : mwotton
 #  feedburner : mowtton
 
-theme: jekyll-theme-basically-basic
+#theme: jekyll-theme-basically-basic
 # remote-theme: daattali/beautiful-jekyll
 remote-theme: "mmistakes/jekyll-theme-basically-basic"
 plugins:
