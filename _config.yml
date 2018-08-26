@@ -10,6 +10,7 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "
 #
 #
 
+theme: beautiful-jekyll-theme
 title : shimweasel.com
 tagline: another quixotic hacker
 author :
