@@ -169,8 +169,8 @@ anything I've missed.
 - [Similar](http://mcfunley.com/choose-boring-technology)
 - A [contrary view](http://mattjolson.github.io/2016/12/04/new-toy-syndrome.html) from the enterprise
 
-Thanks to [Matt Olson](https://twitter.com/carnivorous8008) and [David Maciver](https://twitter.com/DRMacIver)
-for thoughtful comments on a draft.
+Thanks to [Matt Olson](https://twitter.com/carnivorous8008), [David Maciver](https://twitter.com/DRMacIver) and
+Alec Heller for thoughtful comments on a draft.
 
 Thanks also to my other reviewers who I currently can't find because
 Twitter search is terrible, and apologies that this took almost a year
