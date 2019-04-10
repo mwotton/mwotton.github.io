@@ -4,3 +4,4 @@ gem 'github-pages' , group: :jekyll_plugins
 gem 'jekyll-remote-theme'
 gem 'jekyll-theme-iota'
 gem 'jekyll-theme-basically-basic'
+gem "nokogiri",  ">= 1.8.5"
