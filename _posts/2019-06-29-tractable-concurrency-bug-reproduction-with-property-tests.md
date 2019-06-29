@@ -54,6 +54,9 @@ bugs when you interact in a single-threaded way, but it at least tells us that i
 Let's try a more devious test:
 
 ```
+withThreadsAndIterations threads iterations f = forConcurrently [1..threads] $ replicateM (fromIntegral iterations) . f
+
+...
 
   it "fails when we pound it hard" $ do
     let f incr x = (x+incr, x)
@@ -61,10 +64,10 @@ Let's try a more devious test:
         threads = 20
     ref1 <- newIORef 1
     ref2 <- newIORef 1
-    let withThreadsAndIterations f = forConcurrently [1..threads] $ replicateM iterations . f
+    let runConcurrently = withThreadsAndIterations threads iterations
 
-    actualAtomic    <- withThreadsAndIterations $ atomicModifyIORef ref1 . f
-    notReallyAtomic <- withThreadsAndIterations $ notReallyAtomicModifyIORef ref2 . f
+    actualAtomic    <- runConcurrently $ atomicModifyIORef ref1 . f
+    notReallyAtomic <- runConcurrently $ notReallyAtomicModifyIORef ref2 . f
     notReallyAtomic `shouldBe` actualAtomic
 ```
 
@@ -72,8 +75,6 @@ Hurrah, we have an observable failure! Less hurrah: it's a page of numbers, and 
 thread and iteration count to get an error. But why do that when we have computers to do it for us?
 
 ```
-
-
 newtype ConcurrencyLevel = ConcurrencyLevel Int
   deriving Show
 
@@ -83,15 +84,15 @@ instance Arbitrary ConcurrencyLevel where
 ...
 
   it "fails when we pound it hard, but with a property" $ do
-    property $ \(Iterations iterations, ConcurrencyLevel threads) -> do
+    property $ \(ConcurrencyLevel threads, Iterations iterations) -> do
       let f incr x = (x+incr, x)
-      let withThreadsAndIterations f = forConcurrently [1..threads] $ replicateM iterations . f
+      let runConcurrently = withThreadsAndIterations threads iterations
 
       ref1 <- newIORef 1
       ref2 <- newIORef 1
 
-      actualAtomic    <- withThreadsAndIterations $ atomicModifyIORef ref1 . f
-      notReallyAtomic <- withThreadsAndIterations $ notReallyAtomicModifyIORef ref2 . f
+      actualAtomic    <- runConcurrently $ atomicModifyIORef ref1 . f
+      notReallyAtomic <- runConcurrently $ notReallyAtomicModifyIORef ref2 . f
       notReallyAtomic `shouldBe` actualAtomic
 
 ```
@@ -99,10 +100,9 @@ instance Arbitrary ConcurrencyLevel where
 This works too, but we still have a wall of text from the test!
 
 ```
-simple tests fails when we pound it hard, but with a property
-       Falsifiable (after 42 tests):
-         (Iterations 37,ConcurrencyLevel 32)
-       expected: [[2,4,6,8,...
+  2) simple tests fails when we pound it hard, but with a property
+       Falsifiable (after 20 tests):
+         (ConcurrencyLevel 14,Iterations 12)
 ```
 
 What's going on here? Well, I've deliberately left out the `shrink` operation on the `Iterations` and
@@ -111,21 +111,47 @@ What's going on here? Well, I've deliberately left out the `shrink` operation on
 ```
 instance Arbitrary Iterations where
   arbitrary = Iterations . abs <$> arbitrary
-  shrink (Iterations i) = fmap Iterations (shrink i)
+  shrink (Iterations i) = Iterations <$> shrink i
 
 instance Arbitrary ConcurrencyLevel where
   arbitrary = ConcurrencyLevel . abs <$> arbitrary
-  shrink (ConcurrencyLevel i) = fmap ConcurrencyLevel (shrink i)
+  shrink (ConcurrencyLevel i) = ConcurrencyLevel <$> shrink i
 ```
 
-Now we get an error much more quickly:
+Now we get a smaller error case.
 
 ```
-  test/Main.hs:62:7:
+ 2) simple tests fails when we pound it hard, but with a property
+       Falsifiable (after 12 tests):
+         (ConcurrencyLevel 9,Iterations 7)
+
+```
+
+Can we do better? Yes! We care about a low concurrency level much more than we care about a low number of iterations,
+but there's no direct way to express that to QuickCheck's shrinking algorithm: once it has found a failing
+case, it will continue to shrink from that. This is a little awkward, because it might start at a relatively
+low number of iterations and not be able to get an error without a higher than necessary concurrency value.
+
+Thankfully, there's an easy fix: if we change the `Arbitrary` instance for `Iterations`, we can add 100 to it.
+The shrinker is still happy to shrink below that (and this is a good reason not to rely on fancy definitions for
+`Arbitrary` to maintain correctness: as a rule, your correctness properties should always be on your types,
+not baked into the generators), but it will give the tests a better chance to settle on the lowest necessary
+concurrency.
+
+with this new definition
+```
+
+instance Arbitrary Iterations where
+  arbitrary = Iterations . (+100) . abs <$> arbitrary
+  shrink (Iterations i) = fmap Iterations (shrink i)
+```
+
+we get a much better concurrency level:
+
+```
   2) simple tests fails when we pound it hard, but with a property
-       Falsifiable (after 49 tests and 7 shrinks):
-         (Iterations 33,ConcurrencyLevel 5)
-
+       Falsifiable (after 7 tests and 7 shrinks):
+         (ConcurrencyLevel 2,Iterations 39)
 ```
 
 Final thing we might want to check: concurrency errors tend to be quite flaky. However, if we
@@ -133,19 +159,19 @@ run the whole test 10 times at a given number of iterations and concurrency and 
 time, that's probably a reasonable concrete test case to start investigating.
 
 ```
-  it "property fails all of 5 attempts" $ do
-    property $ \(Iterations iterations, ConcurrencyLevel threads) -> do
+  it "property fails all of 10 attempts" $ do
+    property $ \(ConcurrencyLevel threads, Iterations iterations) -> do
       let f incr x = (x+incr, x)
       let trials = 10
-      let withThreadsAndIterations f = forConcurrently [1..threads] $ replicateM iterations . f
+      let runConcurrently = withThreadsAndIterations threads iterations
 
       ref1 <- newIORef 1
       ref2 <- newIORef 1
 
       actualAtomic    <- forM [1..trials] $ \_ ->
-        withThreadsAndIterations $ atomicModifyIORef ref1 . f
+        runConcurrently $ atomicModifyIORef ref1 . f
       notReallyAtomic <- forM [1..trials] $ \_ ->
-        withThreadsAndIterations $ notReallyAtomicModifyIORef ref2 . f
+        runConcurrently $ notReallyAtomicModifyIORef ref2 . f
 
       -- we fail only if _every_ run fails.
       (head actualAtomic, or (zipWith (==) actualAtomic notReallyAtomic))
@@ -155,16 +181,29 @@ time, that's probably a reasonable concrete test case to start investigating.
 which gives us
 
 ```
-3) simple tests property fails all of 5 attempts
-       Falsifiable (after 39 tests and 2 shrinks):
-         (Iterations 34,ConcurrencyLevel 15)
+ 3) simple tests property fails all of 10 attempts
+       Falsifiable (after 7 tests and 5 shrinks):
+         (ConcurrencyLevel 2,Iterations 45)
 ```
 
-So: now we know that we can fairly reliably reproduce the bug at that number of iterations and concurrency
-level. You can push this in lots of directions - for instance, maybe it's more important to limit the
-concurrency than the runtime, so you might fix the iterations to something high and see how low the
-concurrency level can go (at 100 iterations, I can provoke the bug at concurrency level 2!).
 
-The point of all this is that you can use your test suite as a way to explore the dynamic state space of
-your program and make it easy to find bugs. This is a very simple example, but I've used a similar technique
-to find database connection pooling bugs.
+# Conclusion
+
+What can we take away from this?
+
+1. This is a fairly efficient, low effort method for capturing nasty concurrency bugs.
+2. Shrinking is often neglected, but is very important for producing tractable test cases.
+3. Arbitrary instances should be as simple as possible, and encode no correctness requirements: the place
+for that is in the datatype, whether through smart constructors or something like [refined](https://hackage.haskell.org/package/refined).
+4. It is however totally ok to fiddle with the generator to guide search, rather than to avoid cases
+where you know it's going to break.
+5. Because QuickCheck will shrink your inputs in order, it's important to put the one you care about
+minimising most first in the tuple.
+
+and perhaps a meta-point:
+
+6. This test might be very short-lived. Once you actually find the bug, there's a good chance you can
+capture it in a much quicker unit test, and that might be how you want to prevent regressions. I used this
+technique recently to find a [bug](https://github.com/morphismtech/squeal/pull/139) in Squeal, and the test
+took a full minute to find the problem. This is more a way to explore the dynamic behaviour of your program
+than it is a permanent test.
