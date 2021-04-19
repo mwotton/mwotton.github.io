@@ -32,18 +32,15 @@
   - wrote a crawler that collected the front page from 160
     million domains daily, engineered a system to avoid
     crushing the domain servers involved.
-
   - Haskell stack + C zeromq agent to
     distribute domains for fetching. Sqlite backend for temporary
     storage + elasticsearch for search.
-
   - under the leadstage brand, took meanpath crawl results and
     enriched them with social media info, lead
     scoring, Alexa rank, IP sharing information etc.
 
     The Haxl framework enabled runtime selection of source
     information and clear & efficient compound queries.
-
   - Other meanpath/leadstage projects
     - domain extractor (very fast stream filter for finding domain
       names in data)
