@@ -3,7 +3,7 @@
 ## Skills
 
   - primarily Haskell and PostgreSQL
-  - have also worked professionally in Python, Ruby, C, shell, perl (both standalone and PL/pgqsl)
+  - have also worked professionally in Python, Ruby, C, shell, perl (both standalone and PL/pgSQL)
   - distributed systems design and implementation
   - backend web development
   - some embedded systems work
