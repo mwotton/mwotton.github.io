@@ -64,7 +64,7 @@ lighting tasks.
 
 
 ## OSS patches
-    - squeal, yesod, intero, mandrill binding, slack binding, sqlite3-lz4
+  - squeal, yesod, intero, mandrill binding, slack binding, sqlite3-lz4
 
 ## selection of OSS solo projects
 
