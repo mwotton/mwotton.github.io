@@ -7,7 +7,7 @@ tags: []
 ---
 
 A few days ago I wrote about
-[testing in Haskell](http://www.shimweasel.com/2016/10/24/fast-tests-and-static-languages).
+[testing in Haskell](https://www.shimweasel.com/2016/10/24/fast-tests-and-static-languages).
 It's not quite the whole story, though, and I wanted to dig into what
 I'd like to see.
 
