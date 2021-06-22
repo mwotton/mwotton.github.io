@@ -128,5 +128,5 @@ hackage - it looks like the version in elpa is pretty old.
      end
 
 
-and for extra credit, link with the [gold linker](http://stackoverflow.com/questions/6952396/why-does-ghc-take-so-long-to-link)
+and for extra credit, link with the [gold linker](https://stackoverflow.com/questions/6952396/why-does-ghc-take-so-long-to-link)
 

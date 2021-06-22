@@ -97,7 +97,7 @@ get my Vietnamese to haltingly conversational (provided my
 interlocutor was happy to talk about the weather and how beautiful Da
 Nang was.) The intent was to try to replace time spent on Twitter,
 Facebook, online chess and various mobile games (curse you,
-[Polytopia](http://polytopia.wikia.com/wiki/The_Battle_of_Polytopia_Wikia),
+[Polytopia](https://polytopia.wikia.com/wiki/The_Battle_of_Polytopia_Wikia),
 why must you be so fascinatingly tactical?) with something useful that
 could be done in isolated pockets of time.
 

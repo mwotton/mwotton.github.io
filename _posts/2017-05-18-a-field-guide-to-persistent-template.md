@@ -52,7 +52,7 @@ from the 'persistLowerCase' quasiquoter.
 Finally, our result type is a Q [Dec]. This is a little bit strange:
 'share' is called at the top level, and it looks like a bare top-level
 expression, not a binding declaration. Digging through the docs (and
-http://stackoverflow.com/documentation/haskell/5216/template-haskell-quasiquotes#t=201705181813575250883)
+https://stackoverflow.com/documentation/haskell/5216/template-haskell-quasiquotes#t=201705181813575250883)
 , it turns out that when we have a Q [Dec] at the top level, we can
 omit the standard $( ... ) syntax that we'd usually use for
 introducing TH to normal Haskell code. Almost a little too convenient,

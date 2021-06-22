@@ -241,7 +241,7 @@ off-track: if GHC gives us an error rather than information about a
 hole, we don't even try to fix it: we just roll back to our last good
 state and try again. We were never lost in the weeds; we moved
 relentlessly forward. In practice, experienced Haskellers will have
-something like [ghc-mod](http://www.mew.org/~kazu/proj/ghc-mod/en/)
+something like [ghc-mod](https://www.mew.org/~kazu/proj/ghc-mod/en/)
 running so they can get faster feedback in-editor, but we can still do
 it with just an editor and an open GHCi.
 

@@ -7,7 +7,7 @@ tags: [haskell]
 ---
 
 This is to correct a small error in David R. Maciver's piece on [static
-typing](http://www.drmaciver.com/2016/10/static-typing-will-not-save-us-from-broken-software/)
+typing](https://www.drmaciver.com/2016/10/static-typing-will-not-save-us-from-broken-software/)
 
 Most of the piece is sensible - I just wanted to dispel an apparently
 widespread misunderstanding about build times.

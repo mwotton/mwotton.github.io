@@ -71,7 +71,7 @@ keep the subsecond goal in mind.
 
 I haven't seen anything capable of only running the tests that
 have been affected. The closest is
-[Hspec's](http://hspec.github.io/) --rerun flag, which keeps a running
+[Hspec's](https://hspec.github.io/) --rerun flag, which keeps a running
 tally of failing tests and only runs them until they all pass. This
 helps a lot, especially if you haven't put the work in to make your
 tests fast (we have a fair number of integration tests that interact
