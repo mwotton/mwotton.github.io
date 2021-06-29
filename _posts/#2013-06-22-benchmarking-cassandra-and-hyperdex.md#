@@ -1,0 +1,205 @@
+---
+layout: post
+title: "Benchmarking Cassandra and Hyperdex"
+description: ""
+category:
+tags: [cassandra hyperdex databases benchmark]
+---
+
+At [Meanpath](www.meanpath.com), our technology stack includes Cassandra as the canonical source of
+truth. ElasticSearch is wonderful for many things, but asking it to serve
+as a canonical database is like asking a cheetah to pull a cart.
+
+Unfortunately, after extensive debugging and benchmarking of our core scraper,
+it turns out that when our patented webscale /dev/null webscale solution was
+swapped in for Cassandra, our crawl rate jumped from 10mbit/s to 40. A factor
+of 4 is a hard thing to swallow when you order as many servers as Adam does,
+so I went looking for alternatives. I've enjoyed
+[Emin's blog](https://hackingdistributed.com), so
+[Hyperdex](https://hyperdex.org) was an easy choice, and Aaron's
+[Haskell bindings](https://github.com/AaronFriel/hyhac) made it that much
+easier.
+
+Now, any time you benchmark two things, you're guaranteed to piss off at
+least one person: such is the human condition. Still, some obligatory
+disclaimers might shield me from the worst of the barrage:
+
+- These are benchmarks of the Haskell bindings for
+  [cassandra](https://github.com/ozataman/cassy) and [hyperdex](https://github.com/AaronFriel/hyhac/), not of the underlying database technology.
+- Without [this patch](https://github.com/AaronFriel/hyhac/pull/5) the
+  Hyperdex bindings were likewise extremely slow. (When you copy arrays of
+  characters around by turning them into lists of characters and back, you're
+  going to have a bad time.)
+- These measurements were made on my laptop, with web browsers & chat
+  clients going.
+- It is entirely possible that I have fouled up my cassandra configuration
+  (and indeed, half the point of writing this is in the forlorn hope that
+  somebody will ever-so-kindly point out my idiocy and I will not have to
+  rewrite into Hyperdex (and, more to the point, make my poor fellow
+  developer rewrite his Cassandra->ElasticSearch indexer)).
+
+With that said, let the character assassination begin!
+Source may be found [here](https://github.com/mwotton/cassandra-hyperdex-benchmark) for those of you following along at home.
+
+    rhino ➜  ~/projects/meanpath/benchmarks git:(master) ✗ REPS=10 THREADED=no ./dist/build/backend-benchmarks/backend-benchmarks hyperdex cassandra && REPS=10 THREADED=yes  ./dist/build/backend-benchmarks/backend-benchmarks hyperdex cassandra
+    benchmarking hyperdex
+    collecting 100 samples, 1 iterations each, in estimated 13.10689 s
+    mean: 166.8515 ms, lb 151.0815 ms, ub 189.8025 ms, ci 0.950
+    std dev: 96.22781 ms, lb 73.07528 ms, ub 128.7732 ms, ci 0.950
+    found 21 outliers among 100 samples (21.0%)
+      20 (20.0%) high severe
+    variance introduced by outliers: 98.954%
+    variance is severely inflated by outliers
+
+    benchmarking cassandra
+    collecting 100 samples, 1 iterations each, in estimated 112.0751 s
+    mean: 1.058820 s, lb 1.053807 s, ub 1.064268 s, ci 0.950
+    std dev: 26.63332 ms, lb 22.98704 ms, ub 32.19690 ms, ci 0.950
+    found 2 outliers among 100 samples (2.0%)
+      2 (2.0%) high mild
+    variance introduced by outliers: 19.012%
+    variance is moderately inflated by outliers
+
+Then the threaded run:
+
+    benchmarking hyperdex
+    collecting 100 samples, 1 iterations each, in estimated 11.04631 s
+    mean: 159.9227 ms, lb 148.4826 ms, ub 177.4462 ms, ci 0.950
+    std dev: 71.33615 ms, lb 49.46862 ms, ub 107.9358 ms, ci 0.950
+    found 2 outliers among 100 samples (2.0%)
+      2 (2.0%) high severe
+    variance introduced by outliers: 98.923%
+    variance is severely inflated by outliers
+
+    benchmarking cassandra
+    collecting 100 samples, 1 iterations each, in estimated 78.35000 s
+    mean: 566.8405 ms, lb 544.4567 ms, ub 592.9088 ms, ci 0.950
+    std dev: 123.3263 ms, lb 104.9915 ms, ub 150.0091 ms, ci 0.950
+    found 4 outliers among 100 samples (4.0%)
+      4 (4.0%) high mild
+    variance introduced by outliers: 94.702%
+
+
+hino ➜  ~/projects/meanpath/benchmarks git:(master) ✗ REPS=100 THREADED=no ./dist/build/backend-benchmarks/backend-benchmarks hyperdex cassandra && sleep 10 && REPS=100 THREADED=yes  ./dist/build/backend-benchmarks/backend-benchmarks hyperdex cassandra
+<stdin>:5:Bad Request: Cannot add existing keyspace "testkeyspace"
+<stdin>:23:Bad Request: Cannot add already existing column family "testkeyspace" to keyspace "phonebook"
+100
+warming up
+estimating clock resolution...
+mean is 2.747081 us (320001 iterations)
+found 5316 outliers among 319999 samples (1.7%)
+  3382 (1.1%) high severe
+estimating cost of a clock call...
+mean is 65.16924 ns (27 iterations)
+found 1 outliers among 27 samples (3.7%)
+  1 (3.7%) low mild
+
+benchmarking hyperdex
+collecting 100 samples, 1 iterations each, in estimated 128.6617 s
+mean: 3.645439 s, lb 3.421509 s, ub 3.864679 s, ci 0.950
+std dev: 1.136001 s, lb 1.000337 s, ub 1.302807 s, ci 0.950
+found 1 outliers among 100 samples (1.0%)
+variance introduced by outliers: 97.845%
+variance is severely inflated by outliers
+
+benchmarking cassandra
+collecting 100 samples, 1 iterations each, in estimated 1046.176 s
+mean: 10.25514 s, lb 10.23632 s, ub 10.27692 s, ci 0.950
+std dev: 103.8815 ms, lb 92.35189 ms, ub 117.6983 ms, ci 0.950
+<stdin>:5:Bad Request: Cannot add existing keyspace "testkeyspace"
+100
+warming up
+estimating clock resolution...
+mean is 2.705346 us (320001 iterations)
+found 7061 outliers among 319999 samples (2.2%)
+  3299 (1.0%) high mild
+  3762 (1.2%) high severe
+estimating cost of a clock call...
+mean is 64.50652 ns (27 iterations)
+found 3 outliers among 27 samples (11.1%)
+  1 (3.7%) low mild
+  2 (7.4%) high severe
+
+benchmarking hyperdex
+collecting 100 samples, 1 iterations each, in estimated 91.71140 s
+mean: 2.558870 s, lb 1.505820 s, ub 6.876319 s, ci 0.950
+std dev: 9.169340 s, lb 806.0916 ms, ub 21.31923 s, ci 0.950
+found 4 outliers among 100 samples (4.0%)
+  3 (3.0%) high severe
+variance introduced by outliers: 98.999%
+variance is severely inflated by outliers
+
+benchmarking cassandra
+collecting 100 samples, 1 iterations each, in estimated 591.1646 s
+mean: 5.356476 s, lb 5.285502 s, ub 5.428368 s, ci 0.950
+std dev: 366.8622 ms, lb 321.9809 ms, ub 432.2684 ms, ci 0.950
+found 1 outliers among 100 samples (1.0%)
+variance introduced by outliers: 63.593%
+variance is severely inflated by outliers
+
+
+rhino ➜  ~/projects/meanpath/benchmarks git:(master) ✗ time REPS=100 ./dist/build/backend-benchmarks/backend-benchmarks +RTS
+<stdin>:5:Bad Request: Cannot add existing keyspace "testkeyspace"
+memory
+warming up
+estimating clock resolution...
+mean is 5.408927 us (160001 iterations)
+found 18342 outliers among 159999 samples (11.5%)
+  4659 (2.9%) low severe
+  4924 (3.1%) low mild
+  1985 (1.2%) high mild
+  6774 (4.2%) high severe
+estimating cost of a clock call...
+mean is 134.8738 ns (52 iterations)
+found 2 outliers among 52 samples (3.8%)
+  2 (3.8%) low severe
+
+benchmarking sqlite
+collecting 100 samples, 1 iterations each, in estimated 108.2631 s
+mean: 785.2208 ms, lb 746.3232 ms, ub 840.2598 ms, ci 0.950
+std dev: 234.4039 ms, lb 173.8793 ms, ub 394.9194 ms, ci 0.950
+found 1 outliers among 100 samples (1.0%)
+  1 (1.0%) high severe
+variance introduced by outliers: 97.832%
+variance is severely inflated by outliers
+
+benchmarking file
+collecting 100 samples, 1 iterations each, in estimated 11.87530 s
+mean: 200.7013 ms, lb 189.4539 ms, ub 210.6933 ms, ci 0.950
+std dev: 54.31291 ms, lb 48.67792 ms, ub 58.28939 ms, ci 0.950
+variance introduced by outliers: 96.799%
+variance is severely inflated by outliers
+
+benchmarking cassandra
+collecting 100 samples, 1 iterations each, in estimated 1175.592 s
+mean: 11.47118 s, lb 11.44855 s, ub 11.49503 s, ci 0.950
+std dev: 118.8567 ms, lb 104.1551 ms, ub 141.9461 ms, ci 0.950
+
+benchmarking hyperdex
+collecting 100 samples, 1 iterations each, in estimated 9.721899 s
+mean: 246.5164 ms, lb 201.3504 ms, ub 337.7202 ms, ci 0.950
+std dev: 316.4893 ms, lb 197.5020 ms, ub 590.2945 ms, ci 0.950
+found 27 outliers among 100 samples (27.0%)
+  7 (7.0%) low mild
+  8 (8.0%) high mild
+  12 (12.0%) high severe
+variance introduced by outliers: 98.991%
+variance is severely inflated by outliers
+
+So in the non-threaded case, Hyperdex comes out 6 times faster.
+Threading does seem to improve the Cassandra bench while not helping
+Hyperdex much, but Hyperdex is still 3.5 times as fast.
+
+If anyone can hazard a guess as to why Cassandra is lagging, I'd love
+to discuss - tweet me at @mwotton or @meanpathdata. Thanks to Ozgun Ataman for
+the Cassandra binding, Bryan O'Sullivan for the excellent Criterion
+benchmarking library, Emin & team for Hyperdex, Aaron Friel for
+the Hyperdex binding, and the crew at RailsCamp Melbourne for putting
+up with my wild-eyed rantings on type systems with grace and aplomb.
+
+
+
+100 reps = 100 x 11k, inserting 1.1mb in 40ms
+= 2500 a second
+hyperdex with one server
+mean: 40.68101 ms, lb 28.60144 ms, ub 72.43344 ms, ci 0.950
