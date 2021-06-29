@@ -90,6 +90,6 @@ lighting tasks.
 
    - +1 734 239 0390
    - mwotton@gmail.com
-   - https://www.shimweasel.com
+   - https://shimweasel.com
    - https://twitter.com/mwotton
    - https://hackage.haskell.org/user/MarkWotton
