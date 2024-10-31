@@ -170,11 +170,6 @@ GEM
     jekyll-theme-hacker (0.1.2)
       jekyll (> 3.5, < 5.0)
       jekyll-seo-tag (~> 2.0)
-    jekyll-theme-iota (0.9.0)
-      jekyll (~> 3.7)
-      jekyll-feed (~> 0.9)
-      jekyll-seo-tag (~> 2.4)
-      jekyll-sitemap (~> 1.2)
     jekyll-theme-leap-day (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
@@ -240,7 +235,8 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rexml (3.2.5)
+    rexml (3.3.6)
+      strscan
     rouge (3.26.0)
     ruby-enum (0.9.0)
       i18n
@@ -257,6 +253,7 @@ GEM
       faraday (> 0.8, < 2.0)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
+    strscan (3.1.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thread_safe (0.3.6)
@@ -277,7 +274,6 @@ DEPENDENCIES
   github-pages
   jekyll-remote-theme
   jekyll-theme-basically-basic
-  jekyll-theme-iota
   nokogiri (>= 1.8.5)
 
 BUNDLED WITH
