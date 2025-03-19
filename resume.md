@@ -3,21 +3,26 @@
 ## Skills
 
   - primarily Haskell and PostgreSQL
-  - have also worked professionally in Python, Ruby, C, shell, perl (both standalone and PL/pgSQL)
+  - have also worked professionally in Java, Python, TypeScript, C, shell, perl (both standalone and PL/pgSQL) and Ruby
   - distributed systems design and implementation
   - backend web development
   - some embedded systems work
 
 ## Work History
 
-### SimSpace (Lead Software Engineer, Oct 2017-present)
+### LambdaLabs OU (solo operator/consultant, 2020-present)
+  - provided web crawling services & data (Python, Haskell)
+  - optimised critical code for a Sydney Haskell startup getting it down from minutes to half a second.
+  - built a timetable solver for a medical startup using Java and TypeScript that produced significantly better results while respecting existing semantics (using generative testing with MiniTSis, which was written for this.)
+  - implemented a favicon healthcheck site (TypeScript, Haskell)
+  - built a system for automatically generating Scrapy web crawlers from a base URL using LLMs (Haskell)
+  - built a decision tree generator using LLMs to answer legal questions (Python)
 
+### SimSpace (Lead Software Engineer, Oct 2017-2020)
   - authored a resource management web app for deciding when a given network
 	could be built, given the resources available. Squeal/Servant
   - authored a query language & compiler for content search.
-  - wrote [squealgen](https://github.com/mwotton/squealgen) in order to automatically
-	generate haskell-level types from a given database and integrated it into
-	the SimSpace build process.
+  - wrote [squealgen](https://github.com/mwotton/squealgen) in order to automatically	generate haskell-level types from a given database and integrated it into	the SimSpace build process.
   - extensive database query profiling and optimisation.
   - added infrastructure for database-level testing with automatic migration.
 
@@ -29,21 +34,13 @@
 
 ### MeanPath/LeadStage (CTO, Oct 2013-Oct 2015)
 
-  - wrote a crawler that collected the front page from 160
-    million domains daily, engineered a system to avoid
-    crushing the domain servers involved.
-  - Haskell stack + C zeromq agent to
-    distribute domains for fetching. Sqlite backend for temporary
-    storage + elasticsearch for search.
-  - under the leadstage brand, took meanpath crawl results and
-    enriched them with social media info, lead
-    scoring, Alexa rank, IP sharing information etc.
+  - wrote a crawler that collected the front page from 160 million domains daily, engineered a system to avoid crushing the domain servers involved.
+  - Haskell stack + C zeromq agent to distribute domains for fetching. Sqlite backend for temporary storage + elasticsearch for search.
+  - under the leadstage brand, took meanpath crawl results and enriched them with social media info, lead scoring, Alexa rank, IP sharing information etc.
 
-    The Haxl framework enabled runtime selection of source
-    information and clear & efficient compound queries.
+    The Haxl framework enabled runtime selection of source information and clear & efficient compound queries.
   - Other meanpath/leadstage projects
-    - domain extractor (very fast stream filter for finding domain
-      names in data)
+    - domain extractor (very fast stream filter for finding domain names in data)
     - arin crawler
     - fault-tolerant elasticsearch ingester
     - parallelised SMTP query engine
@@ -62,12 +59,12 @@
 board, allowing it to be programmed from a handheld device for complex
 lighting tasks.
 
-
 ## OSS patches
-  - squeal, yesod, intero, mandrill binding, slack binding, sqlite3-lz4
+  - squeal, yesod, intero, mandrill binding, slack binding, sqlite3-lz4, quickjs-hs
 
 ## selection of OSS solo projects
 
+- [miniTSis](https://github.com/lambdamechanic/miniTSis): TypeScript implementation of Hypothesis-style generative testing (ported from minithesis)
 - [roboservant](https://github.com/mwotton/roboservant) : a type-driven fuzzer
 - [squealgen](https://github.com/mwotton/squealgen) : a type generator for postgresql databases
 - [robots.txt](https://github.com/meanpath/robots) : a parser library for robots.txt files
@@ -88,8 +85,8 @@ lighting tasks.
 
 ## Contact
 
-   - +1 734 239 0390
-   - mwotton@gmail.com
+   - +84 038 568 9863
+   - mark@lambdamechanic.com
    - https://shimweasel.com
    - https://twitter.com/mwotton
    - https://hackage.haskell.org/user/MarkWotton
