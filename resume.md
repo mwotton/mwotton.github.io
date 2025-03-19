@@ -1,12 +1,11 @@
 # Resume for Mark Wotton
 
 ## Skills
-
-  - primarily Haskell and PostgreSQL
-  - have also worked professionally in Java, Python, TypeScript, C, shell, perl (both standalone and PL/pgSQL) and Ruby
-  - distributed systems design and implementation
-  - backend web development
-  - some embedded systems work
+  - LLM-powered backend systems
+  - general web development
+  - generative testing
+  - embedded systems work
+  - have worked professionally in Haskell, Postgres, Java, Python, TypeScript, C, shell, perl (both standalone and PL/pgSQL) and Ruby
 
 ## Work History
 
