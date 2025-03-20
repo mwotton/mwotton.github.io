@@ -1,35 +1,36 @@
 # Resume for Mark Wotton
 
+I'm a highly experienced freelancer and consultant with significant experience solving technical problems with whatever tools suit the work to be done, with a particular focus on algorithmically complex backend systems and end-to-end correctness via types (from HTTP to database) and generative testing.
+
 ## Skills
   - LLM-powered backend systems
   - general web development
   - generative testing
   - embedded systems work
-  - have worked professionally in Haskell, Postgres, Java, Python, TypeScript, C, shell, perl (both standalone and PL/pgSQL) and Ruby
+  - have worked professionally in Haskell, Postgres, Java, Python, TypeScript, Rust, C, shell, perl (both standalone and PL/pgSQL) and Ruby for the past 25 years.
 
 ## Work History
 
 ### LambdaLabs OU (solo operator/consultant, 2020-present)
-  - provided web crawling services & data (Python, Haskell)
+  - provided web crawling services & data (Python, Haskell).
   - optimised critical code for a Sydney Haskell startup getting it down from minutes to half a second.
-  - built a timetable solver for a medical startup using Java and TypeScript that produced significantly better results while respecting existing semantics (using generative testing with MiniTSis, which was written for this.)
-  - implemented a favicon healthcheck site (TypeScript, Haskell)
-  - built a system for automatically generating Scrapy web crawlers from a base URL using LLMs (Haskell)
-  - built a decision tree generator using LLMs to answer legal questions (Python)
+  - built a timetable solver for a medical startup using Java and TypeScript that produced significantly better results while respecting existing semantics (using generative testing with MiniTSis, which was written for this.).
+  - implemented a favicon healthcheck site (TypeScript, Rust).
+  - built a system for automatically generating Scrapy web crawlers from a base URL using LLMs (Haskell).
+  - built a decision tree generator using LLMs to answer legal questions (Python).
 
 ### SimSpace (Lead Software Engineer, Oct 2017-2020)
-  - authored a resource management web app for deciding when a given network
-	could be built, given the resources available. Squeal/Servant
+  - authored a resource management web app for deciding when a given network could be built, given the resources available. Squeal/Servant
   - authored a query language & compiler for content search.
-  - wrote [squealgen](https://github.com/mwotton/squealgen) in order to automatically	generate haskell-level types from a given database and integrated it into	the SimSpace build process.
+  - wrote [squealgen](https://github.com/mwotton/squealgen) in order to automatically generate haskell-level types from a given database and integrated it into	the SimSpace build process.
   - extensive database query profiling and optimisation.
-  - added infrastructure for database-level testing with automatic migration.
+  - added infrastructure for ephemeral database-level testing with automatic migration.
 
-### BetterTeam (Senior Software Engineer, Oct 2015-Oct 2017 )
+### BetterTeam (Founding Engineer, Oct 2015-Oct 2017 )
 
-  - initiated a Haskell web app for betterteam.com, including email
+  - founding engineer for betterteam.com, including email
     processing, analytics integration with segment/intercom, and
-    extensive healthchecks & monitoring. yesod/postgresql/ghcjs.
+    extensive healthchecks & monitoring. App is still running with over a million jobs posted and 40 million candidates. yesod/postgresql/ghcjs.
 
 ### MeanPath/LeadStage (CTO, Oct 2013-Oct 2015)
 
@@ -89,3 +90,5 @@ lighting tasks.
    - https://shimweasel.com
    - https://twitter.com/mwotton
    - https://hackage.haskell.org/user/MarkWotton
+   - https://www.npmjs.com/~mwotton
+   - https://lib.rs/~mwotton
