@@ -7,7 +7,7 @@ I'm a highly experienced freelancer and consultant with significant experience s
   - general web development
   - generative testing
   - embedded systems work
-  - have worked professionally in Haskell, Postgres, Java, Python, TypeScript, Rust, C, shell, perl (both standalone and PL/pgSQL) and Ruby for the past 25 years.
+  - have worked professionally in Haskell, Postgres, Java, Python, TypeScript, Rust, C, shell, perl and Ruby for the past 25 years.
 
 ## Work History
 
