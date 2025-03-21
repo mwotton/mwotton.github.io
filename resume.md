@@ -1,6 +1,6 @@
 # Resume for Mark Wotton
 
-I'm a highly experienced freelancer and consultant with significant experience solving technical problems with whatever tools suit the work to be done, with a particular focus on algorithmically complex backend systems and end-to-end correctness via types (from HTTP to database) and generative testing.
+I'm a highly experienced freelancer and consultant with significant experience solving technical problems with whatever tools suit the work to be done, with a particular focus on algorithmically complex backend systems and end-to-end correctness via types (from HTTP to database) and generative testing with Python and Haskell.
 
 ## Skills
   - LLM-powered backend systems
