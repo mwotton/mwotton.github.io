@@ -6,3 +6,4 @@ gem 'jekyll-remote-theme'
 # gem 'jekyll-theme-iota'
 gem 'jekyll-theme-basically-basic'
 gem "nokogiri",  ">= 1.8.5"
+gem "webrick", "~> 1.8"
