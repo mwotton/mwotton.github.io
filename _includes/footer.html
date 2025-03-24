@@ -4,7 +4,7 @@
       {% if site.copyright %}
         {{ site.copyright | markdownify }}
       {% else %}
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title | default: "shimweasel.com" }}. <a href="/resume">Resume</a> | Available for consulting work - mail me at mark@lambdamechanic.com</p>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title | default: "shimweasel.com" }}.</p>
       {% endif %}
     </div>
     <div class="social-links">
@@ -20,6 +20,11 @@
           <span class="sr-only">GitHub</span>
         </a>
       {% endif %}
+      <a href="/resume">
+        <i class="fas fa-file" aria-hidden="true"></i>
+        <span class="sr-only">Resume</span>
+      </a>
+      <span>Available for consulting work - mail me at mark@lambdamechanic.com</span>
     </div>
   </div>
 </footer>
