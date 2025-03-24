@@ -1,30 +1,118 @@
 <footer id="footer" class="site-footer">
   <div class="inner">
-    <div class="copyright">
-      {% if site.copyright %}
-        {{ site.copyright | markdownify }}
-      {% else %}
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.title | default: "shimweasel.com" }}.</p>
-      {% endif %}
+    <div class="bio-block">
+      <h3>About Me</h3>
+      <p>Hi, I'm Mark. I'm a highly experienced freelancer and consultant with significant experience solving technical problems with whatever tools suit the work to be done, with a particular focus on algorithmically complex backend systems and end-to-end correctness via types (from HTTP to database) and generative testing.</p>
+      <p>If that sounds like it could be useful to you, get in touch at <a href="mailto:mark@lambdamechanic.com">mark@lambdamechanic.com</a>. For more detail see <a href="/resume">my resume</a> and my <a href="https://github.com/{% if site.author.github %}{{ site.author.github }}{% else %}markwotton{% endif %}">GitHub</a>.</p>
     </div>
-    <div class="social-links">
-      {% if site.author.twitter %}
-        <a href="https://twitter.com/{{ site.author.twitter }}">
-          <i class="fab fa-twitter" aria-hidden="true"></i>
-          <span class="sr-only">Twitter</span>
+    <div class="footer-bottom">
+      <div class="copyright">
+        {% if site.copyright %}
+          {{ site.copyright | markdownify }}
+        {% else %}
+          <p>&copy; {{ site.time | date: '%Y' }} {{ site.title | default: "shimweasel.com" }}.</p>
+        {% endif %}
+      </div>
+      <div class="social-links">
+        {% if site.author.twitter %}
+          <a href="https://twitter.com/{{ site.author.twitter }}">
+            <i class="fab fa-twitter" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span>
+          </a>
+        {% endif %}
+        {% if site.author.github %}
+          <a href="https://github.com/{{ site.author.github }}">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span>
+          </a>
+        {% endif %}
+        <a href="/resume">
+          <i class="fas fa-file" aria-hidden="true"></i>
+          <span class="sr-only">Resume</span>
         </a>
-      {% endif %}
-      {% if site.author.github %}
-        <a href="https://github.com/{{ site.author.github }}">
-          <i class="fab fa-github" aria-hidden="true"></i>
-          <span class="sr-only">GitHub</span>
-        </a>
-      {% endif %}
-      <a href="/resume">
-        <i class="fas fa-file" aria-hidden="true"></i>
-        <span class="sr-only">Resume</span>
-      </a>
-      <span>Available for consulting work - mail me at mark@lambdamechanic.com</span>
+      </div>
     </div>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+  }
+  
+  .site-footer .inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .bio-block {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+  
+  .bio-block h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #343a40;
+  }
+  
+  .bio-block p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .bio-block a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #495057;
+    transition: all 0.2s ease;
+  }
+  
+  .social-links a:hover {
+    background-color: #495057;
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .copyright {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
