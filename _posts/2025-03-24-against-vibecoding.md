@@ -49,7 +49,9 @@ The nitty gritty! My favourite tool at the moment is [Aider](https://aider.chat)
 
 ### Use /architect mode
 
-The only model that seems any good at editing using Aider's SEARCH/REPLACE model is Sonnet 3.5, but some of the other models (Deepseek R1, grok-beta, o3-mini) are a bit smarter at actual code. If you're writing simple code then probably Sonnet 3.5 by itself is fine. You can do this by running `aider --architect --model openrouter/x-ai/grok-beta --editor-model openrouter/anthropic/claude-3.5-sonnet`, modify as appropriate.
+The only* model that seems any good at editing using Aider's SEARCH/REPLACE model is Sonnet 3.5, but some of the other models (Deepseek R1, grok-beta, o3-mini) are a bit smarter at actual code. If you're writing simple code then probably Sonnet 3.5 by itself is fine. You can do this by running `aider --architect --model openrouter/x-ai/grok-beta --editor-model openrouter/anthropic/claude-3.5-sonnet`, modify as appropriate.
+
+* edit: several hours after I published this, deepseek v3 0324 came out, and it is about as good as Sonnet at editing, and much cheaper. Life moves pretty fast.
 
 ### Use openrouter.ai
 
